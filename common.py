@@ -8,7 +8,7 @@ class Day:
         return self.input.split("\n")
 
     def read(self):
-        with open(f"Day_{self.year}_{self.day}.txt", "r") as f:
+        with open(f"input.txt", "r") as f:
             return f.read()
 
     def part_1(self):
@@ -47,7 +47,7 @@ class StructureManager:
 
     @staticmethod
     def __create_script(year, day):
-        with open(f"{year}/Day_{year}_{day}.py", "w+") as f:
+        with open(f"{year}/{day}/script.py", "w+") as f:
             f.write(f"""
 from common import Day
 
@@ -70,12 +70,23 @@ if __name__ == "__main__":
 
     @staticmethod
     def __create_input(year, day):
-        open(f"{year}/Day_{year}_{day}.txt", "w+").close()
+        open(f"{year}/{day}/input.txt", "w+").close()
 
     def create(self, year):
         self.__create_year(year)
-        for i in range(1, 30):
+        for i in range(1, 26):
             day = str(i).zfill(2)
+            os.mkdir(f"{year}/{day}")
             self.__create_script(year, day)
             self.__create_input(year, day)
+
+
+    def migrate(self, year):
+        self.__create_year(f"{year}_migrated")
+        for i in range(1, 26):
+            day = str(i).zfill(2)
+            os.mkdir(f"{year}_migrated/{day}")
+            os.rename(f"{year}/Day_{year}_{day}.py", f"{year}_migrated/{day}/script.py")
+            os.rename(f"{year}/Day_{year}_{day}.txt", f"{year}_migrated/{day}/input.txt")
+
 

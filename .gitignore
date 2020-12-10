@@ -125,3 +125,6 @@ dmypy.json
 .pyre/
 
 2018
+.DS_Store
+.idea/
+main.py
