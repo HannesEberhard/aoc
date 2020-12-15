@@ -1,6 +1,5 @@
 
 from common import Day
-from collections import defaultdict
 
 
 class Day_2020_15(Day):
@@ -25,7 +24,6 @@ class Day_2020_15(Day):
             if len(history[number]) == 3:
                 history[number] = history[number][1:3]
         return number
-
 
     def part_1(self):
         return self.simulate(self.parsed, 2020)
